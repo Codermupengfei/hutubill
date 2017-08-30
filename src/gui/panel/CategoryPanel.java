@@ -17,7 +17,7 @@ import util.GUIUtil;
 /**
  * Created by OovEver on 2017/8/29.
  */
-public class CategoryPanel extends JPanel {
+public class CategoryPanel extends WorkingPanel {
     static {
         GUIUtil.useLNF();
     }

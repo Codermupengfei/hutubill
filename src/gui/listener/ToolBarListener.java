@@ -1,23 +1,26 @@
 package gui.listener;
 
-import gui.panel.*;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by OovEver on 2017/8/29.
- */
+import javax.swing.JButton;
+
+import gui.panel.BackupPanel;
+import gui.panel.CategoryPanel;
+import gui.panel.ConfigPanel;
+import gui.panel.SpendPanel;
+import gui.panel.MainPanel;
+import gui.panel.RecordPanel;
+import gui.panel.RecoverPanel;
+import gui.panel.ReportPanel;
+
 public class ToolBarListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         MainPanel p = MainPanel.instance;
-//        获取是哪个按钮发出的
         JButton b = (JButton) e.getSource();
-        if (b == p.bReport) {
+        if (b == p.bReport)
             p.workingPanel.show(ReportPanel.instance);
-        }
         if (b == p.bCategory)
             p.workingPanel.show(CategoryPanel.instance);
         if (b == p.bSpend)

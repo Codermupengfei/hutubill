@@ -12,31 +12,34 @@ import java.util.List;
  * Created by OovEver on 2017/8/29.
  */
 public class CategoryService {
-    CategoryDAO categoryDAO = new CategoryDAO();
-    RecordDAO recordDAO = new RecordDAO();
+    CategoryDAO categoryDao = new CategoryDAO();
+    RecordDAO recordDao = new RecordDAO();
+
     public List<Category> list() {
-        List<Category> cs = categoryDAO.list();
+        List<Category> cs= categoryDao.list();
         for (Category c : cs) {
-            List<Record> rs = recordDAO.list(c.id);
-            c.recordNumber = rs.size();
+            List<Record> rs =recordDao.list(c.id);
+            c.recordNumber=rs.size();
         }
         Collections.sort(cs,(c1,c2)->c2.recordNumber-c1.recordNumber);
+
         return cs;
     }
 
     public void add(String name) {
         Category c = new Category();
         c.setName(name);
-        categoryDAO.add(c);
+        categoryDao.add(c);
     }
 
     public void update(int id, String name) {
-        Category category = new Category();
-        category.setName(name);
-        category.setId(id);
-        categoryDAO.update(category);
+        Category c = new Category();
+        c.setName(name);
+        c.setId(id);
+        categoryDao.update(c);
     }
+
     public void delete(int id) {
-        categoryDAO.delete(id);
+        categoryDao.delete(id);
     }
 }

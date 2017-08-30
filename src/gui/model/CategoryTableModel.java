@@ -38,7 +38,6 @@ public class CategoryTableModel extends AbstractTableModel {
             return h.name;
         if (1 == columnIndex)
             return h.recordNumber;
-
         return null;
     }
 }

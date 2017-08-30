@@ -1,6 +1,7 @@
 package gui.panel;
 
 import gui.listener.ConfigListener;
+import service.ConfigService;
 import util.ColorUtil;
 import util.GUIUtil;
 
@@ -10,7 +11,7 @@ import java.awt.*;
 /**
  * Created by OovEver on 2017/8/29.
  */
-public class ConfigPanel extends JPanel {
+public class ConfigPanel extends WorkingPanel {
     static {
         GUIUtil.useLNF();
     }
@@ -56,5 +57,12 @@ public class ConfigPanel extends JPanel {
         ConfigListener l =new ConfigListener();
         bSubmit.addActionListener(l);
     }
-
+    @Override
+    public void updateData() {
+        String budget = new ConfigService().get(ConfigService.budget);
+        String mysqlPath = new ConfigService().get(ConfigService.mysqlPath);
+        tfBudget.setText(budget);
+        tfMysqlPath.setText(mysqlPath);
+        tfBudget.grabFocus();
+    }
 }

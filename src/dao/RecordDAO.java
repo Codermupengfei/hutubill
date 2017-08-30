@@ -1,17 +1,21 @@
 package dao;
 
+import java.sql.Connection;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import entity.Record;
 import util.DBUtil;
 import util.DateUtil;
 
-import java.sql.*;
-import java.sql.Date;
-import java.util.*;
-
-/**
- * Created by OovEver on 2017/8/29.
- */
 public class RecordDAO {
+
     public int getTotal() {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
@@ -53,6 +57,7 @@ public class RecordDAO {
             e.printStackTrace();
         }
     }
+
     public void update(Record record) {
 
         String sql = "update record set spend= ?, cid= ?, comment =?, date = ? where id = ?";
@@ -72,6 +77,7 @@ public class RecordDAO {
         }
 
     }
+
     public void delete(int id) {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
@@ -85,6 +91,7 @@ public class RecordDAO {
             e.printStackTrace();
         }
     }
+
     public Record get(int id) {
         Record record = null;
 
@@ -114,7 +121,8 @@ public class RecordDAO {
         }
         return record;
     }
-    public List<Record> list(java.util.Date date, java.util.Date monthEnd) {
+
+    public List<Record> list() {
         return list(0, Short.MAX_VALUE);
     }
 
@@ -152,6 +160,7 @@ public class RecordDAO {
         }
         return records;
     }
+
     public List<Record> list(int cid) {
         List<Record> records = new ArrayList<Record>();
 
@@ -184,6 +193,11 @@ public class RecordDAO {
         }
         return records;
     }
+
+    public List<Record> listToday(){
+        return list(DateUtil.today());
+    }
+
     public List<Record> list(Date day) {
         List<Record> records = new ArrayList<Record>();
         String sql = "select * from record where date =?";
@@ -213,6 +227,7 @@ public class RecordDAO {
         }
         return records;
     }
+
     public List<Record> listThisMonth(){
         return list(DateUtil.monthBegin(),DateUtil.monthEnd());
     }
@@ -246,4 +261,9 @@ public class RecordDAO {
         }
         return records;
     }
+
+    public static void main(String[] args) {
+
+    }
+
 }
